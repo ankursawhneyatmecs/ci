@@ -20,12 +20,12 @@ node {
 			source newvenv/bin/activate
 			pip install -r requirements.txt
 			robot main_code/keyword_driven.robot
-			pylint -j 0 -r n -f parseable data_collections/ | tee pylint.out'''
+			pylint -j 0 -r n -f parseable main_code/ | tee pylint.out'''
 		}
 		
+		//	outputPath : robot_tests,
 		step([
 			$class : 'RobotPublisher',
-			outputPath : robot_tests,
 			outputFileName : "output.xml",
 			disableArchiveOutput : false,
 			reportFileName : "report.html",
