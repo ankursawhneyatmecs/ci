@@ -3,6 +3,8 @@
 properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '4')), [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/ankursawhneyatmecs/ci/'], pipelineTriggers([pollSCM('H/2 * * * *')])])
 
 node {
+        deleteDir()
+		
 		checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/ankursawhneyatmecs/ci.git']]])
 
 		stage('Validate Filenames') {
