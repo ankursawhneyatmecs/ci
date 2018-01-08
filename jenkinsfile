@@ -13,4 +13,12 @@ node {
 				if [ -s invalidfilenames.out ]; then echo "[Error]: Following files with invalid names found in \\
 				workspace" && cat invalidfilenames.out && rm invalidfilenames.out && exit 1; else rm invalidfilenames.out; fi'''
 		}
+		
+		stage('Test and Analyze') {
+			sh '''pip -m virtualenv venv4Demo
+			source venv4Demo/bin/activate
+			pip install -r requirements.txt
+			robot main_code/keyword_driven.robot
+			pylint -j 0 -r n -f parseable data_collections/ | tee pylint.out'''
+		}
 }
