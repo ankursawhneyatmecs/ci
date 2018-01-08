@@ -28,8 +28,8 @@ node {
 			outputPath : robot_tests,
 			outputFileName : "output.xml",
 			disableArchiveOutput : false,
-			reportFileName : "report.html"
-			logFileName : "log.html"
+			reportFileName : "report.html",
+			logFileName : "log.html",
 			passThreshold : 97.0,
 			unstableThreshold: 96.0,
 			enableCache : true
