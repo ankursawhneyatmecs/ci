@@ -16,10 +16,24 @@ node {
 		
 		stage('Test and Analyze') {
 			//Assuming the module 'virtualenv' is already installed
-			sh '''python -m virtualenv venv4Demo
-			source venv4Demo/bin/activate
+			sh '''python -m virtualenv newvenv
+			source newvenv/bin/activate
 			pip install -r requirements.txt
 			robot main_code/keyword_driven.robot
 			pylint -j 0 -r n -f parseable data_collections/ | tee pylint.out'''
 		}
+		
+		step([
+			$class : 'RobotPublisher',
+			outputPath : robot_tests,
+			outputFileName : "output.xml",
+			disableArchiveOutput : false,
+			reportFileName : "report.html"
+			logFileName : "log.html"
+			passThreshold : 97.0,
+			unstableThreshold: 96.0,
+			enableCache : true
+		])
+
+		warnings canComputeNew: false, canResolveRelativePaths: false, categoriesPattern: '', defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '', parserConfigurations: [[parserName: 'PyLint', pattern: 'pylint.out']], unHealthy: ''
 }
