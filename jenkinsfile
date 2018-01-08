@@ -19,15 +19,15 @@ node {
 			sh '''python -m virtualenv newvenv
 			source newvenv/bin/activate
 			pip install -r requirements.txt
-			cd main_code/robot_tests
-			robot keyword_driven.robot
-			cd ../..
+			cd main_code
+			robot -d robot_tests robot_tests
+			cd ..
 			pylint -j 0 -r n -f parseable main_code/ | tee pylint.out'''
 		}
 		
 		step([
 			$class : 'RobotPublisher',
-			outputPath : main_code/robot_tests,
+			outputPath : "main_code/robot_tests",
 			outputFileName : "output.xml",
 			disableArchiveOutput : false,
 			reportFileName : "report.html",
