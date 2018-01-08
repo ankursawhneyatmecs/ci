@@ -21,9 +21,7 @@ node {
 			pip install -r requirements.txt
 			robot -d main_code main_code
 			pylint -j 0 -r n -f parseable main_code/ | tee pylint.out'''
-		}
-		
-		stage('Publish Test result') {
+			
 			step([
 				$class : 'RobotPublisher',
 				outputPath : 'main_code',
@@ -36,9 +34,7 @@ node {
 				enableCache : true,
 				otherFiles: '',
 			])
-		}
-		
-		stage('Publish Static Analysis Result'){
+			
 			warnings canComputeNew: false, canResolveRelativePaths: false, categoriesPattern: '', defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '', parserConfigurations: [[parserName: 'PyLint', pattern: 'pylint.out']], unHealthy: ''
 		}
 }
