@@ -14,29 +14,31 @@ node {
 				workspace" && cat invalidfilenames.out && rm invalidfilenames.out && exit 1; else rm invalidfilenames.out; fi'''
 		}
 		
-		stage('Test and Analyze') {
+		stage('Run UnitTest and Analyze') {
 			//Assuming the module 'virtualenv' is already installed
 			sh '''python -m virtualenv newvenv
 			source newvenv/bin/activate
 			pip install -r requirements.txt
-			cd main_code
-			robot -d unit_tests unit_tests
-			cd ..
+			robot -d main_code main_code
 			pylint -j 0 -r n -f parseable main_code/ | tee pylint.out'''
 		}
 		
-		step([
-			$class : 'RobotPublisher',
-			outputPath : 'main_code/unit_tests',
-			outputFileName : 'output.xml',
-			disableArchiveOutput : false,
-			reportFileName : 'report.html',
-			logFileName : 'log.html',
-			passThreshold : 97.0,
-			unstableThreshold: 96.0,
-			enableCache : true,
-			otherFiles: '',
-		])
-
-		warnings canComputeNew: false, canResolveRelativePaths: false, categoriesPattern: '', defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '', parserConfigurations: [[parserName: 'PyLint', pattern: 'pylint.out']], unHealthy: ''
+		stage('Publish Test result') {
+			step([
+				$class : 'RobotPublisher',
+				outputPath : 'main_code',
+				outputFileName : 'output.xml',
+				disableArchiveOutput : false,
+				reportFileName : 'report.html',
+				logFileName : 'log.html',
+				passThreshold : 97.0,
+				unstableThreshold: 96.0,
+				enableCache : true,
+				otherFiles: '',
+			])
+		}
+		
+		stage('Publish Static Analysis Result'){
+			warnings canComputeNew: false, canResolveRelativePaths: false, categoriesPattern: '', defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '', parserConfigurations: [[parserName: 'PyLint', pattern: 'pylint.out']], unHealthy: ''
+		}
 }
