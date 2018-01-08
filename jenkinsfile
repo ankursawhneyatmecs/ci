@@ -19,7 +19,9 @@ node {
 			sh '''python -m virtualenv newvenv
 			source newvenv/bin/activate
 			pip install -r requirements.txt
-			robot main_code/robot_tests/keyword_driven.robot
+			cd main_code/robot_tests
+			robot keyword_driven.robot
+			cd ../..
 			pylint -j 0 -r n -f parseable main_code/ | tee pylint.out'''
 		}
 		
