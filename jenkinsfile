@@ -25,7 +25,7 @@ node {
 			
 			step([
 				$class : 'RobotPublisher',
-				outputPath : 'unit_tests',
+				outputPath : 'main_code/unit_tests',
 				outputFileName : 'output.xml',
 				disableArchiveOutput : false,
 				reportFileName : 'report.html',
