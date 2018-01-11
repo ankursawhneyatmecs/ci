@@ -25,21 +25,6 @@ node {
 			pip install -r requirements.txt
 			pylint -j 0 -r n -f parseable main_code/ | tee pylint.out
 			cd main_code
-			robot -d unit_tests unit_tests'''
-			
-			step([
-				$class : 'RobotPublisher',
-				outputPath : 'main_code/unit_tests',
-				outputFileName : 'output.xml',
-				disableArchiveOutput : false,
-				reportFileName : 'report.html',
-				logFileName : 'log.html',
-				passThreshold : 97.0,
-				unstableThreshold: 96.0,
-				enableCache : true,
-				otherFiles: '',
-			])
-			
-			warnings canComputeNew: false, canResolveRelativePaths: false, categoriesPattern: '', defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '', parserConfigurations: [[parserName: 'PyLint', pattern: 'pylint.out']], unHealthy: ''
+			robot -d unit_tests unit_tests'''			
 		}
 }
