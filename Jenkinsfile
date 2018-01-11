@@ -14,8 +14,7 @@ node {
 				workspace" && cat invalidfilenames.out && rm invalidfilenames.out && exit 1; else rm invalidfilenames.out; fi'''
 		}
 		
-		stage('Run UnitTest and Analyze') {
-			//Assuming the module 'virtualenv' is already installed
+		stage('Analyze and test') {
 			sh '''#!/bin/bash
 			python --version
 			pip || apt-get install python-pip -y
@@ -24,6 +23,6 @@ node {
 			source newvenv/bin/activate
 			pip install -r requirements.txt
 			pylint -j 0 -r n -f parseable main_code/ | tee pylint.out
-			robot -d main_code main_code'''			
+			robot -d main_code main_code'''
 		}
 }
