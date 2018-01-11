@@ -18,8 +18,8 @@ node {
 			//Assuming the module 'virtualenv' is already installed
 			sh '''
 			python --version
-			pip || sudo yum install python-pip -y
-			virtualenv || sudo pip install virtualenv
+			pip || apt-get install python-pip -y
+			virtualenv || pip install virtualenv
 			python -m virtualenv newvenv
 			source newvenv/bin/activate
 			pip install -r requirements.txt
