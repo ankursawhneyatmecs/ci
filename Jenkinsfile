@@ -16,7 +16,7 @@ node {
 		
 		stage('Run UnitTest and Analyze') {
 			//Assuming the module 'virtualenv' is already installed
-			sh '''
+			sh '''#!/bin/bash
 			python --version
 			pip || apt-get install python-pip -y
 			virtualenv || pip install virtualenv
