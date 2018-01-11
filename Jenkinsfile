@@ -16,7 +16,11 @@ node {
 		
 		stage('Run UnitTest and Analyze') {
 			//Assuming the module 'virtualenv' is already installed
-			sh '''python -m virtualenv newvenv
+			sh '''
+			python --version
+			pip || sudo yum install python-pip -y
+			virtualenv || sudo pip install virtualenv
+			python -m virtualenv newvenv
 			source newvenv/bin/activate
 			pip install -r requirements.txt
 			pylint -j 0 -r n -f parseable main_code/ | tee pylint.out
