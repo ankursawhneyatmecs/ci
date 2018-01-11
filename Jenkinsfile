@@ -24,7 +24,6 @@ node {
 			source newvenv/bin/activate
 			pip install -r requirements.txt
 			pylint -j 0 -r n -f parseable main_code/ | tee pylint.out
-			cd main_code
-			robot -d unit_tests unit_tests'''			
+			robot -d main_code main_code'''			
 		}
 }
