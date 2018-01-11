@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '4')), [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/ankursawhneyatmecs/ci/'] ])
+properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '4')), [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/ankursawhneyatmecs/ci/'], pipelineTriggers([pollSCM('H/2 * * * *')])])
 
 node {
         deleteDir()
