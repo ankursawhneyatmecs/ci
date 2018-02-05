@@ -1,6 +1,6 @@
 pipeline {
   agent {
-        docker { image 'jenkinsci/slave:alpine' }
+        docker { image 'alpine' }
     }
 
   stages {
