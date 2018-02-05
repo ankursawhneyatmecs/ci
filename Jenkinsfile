@@ -1,6 +1,6 @@
 pipeline {
   agent {
-        docker { image 'alpine' }
+        dockerfile true
     }
 
   stages {
@@ -10,12 +10,7 @@ pipeline {
           	
               	sh '''
               	#!/bin/bash
-  	    	      uname -a
-  	    	      echo $0
-  	    	      python2 || { apt install -y python; }
-	              pip2 || { apt install -y python-pip; }
-	              virtualenv2 || { apt install -y virtualenv; }
-                python2 --version
+                python --version
                 '''
             }
         }
