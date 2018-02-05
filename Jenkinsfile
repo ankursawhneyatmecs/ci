@@ -12,9 +12,9 @@ pipeline {
               	#!/bin/bash
   	    	      uname -a
   	    	      echo $0
-  	    	      python2 || { yum install -y python; }
-	              pip2 || { yum install -y python-pip; }
-	              virtualenv2 || { yum install -y virtualenv; }
+  	    	      python2 || { apt install -y python; }
+	              pip2 || { apt install -y python-pip; }
+	              virtualenv2 || { apt install -y virtualenv; }
                 python2 --version
                 '''
             }
