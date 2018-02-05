@@ -15,7 +15,7 @@ pipeline {
   	    	      python2 || { yum install -y python; }
 	              pip2 || { yum install -y python-pip; }
 	              virtualenv2 || { yum install -y virtualenv; }
-                python --version
+                python2 --version
                 '''
             }
         }
