@@ -8,6 +8,7 @@ pipeline {
               	sh '''
               	#!/bin/bash
                 python --version
+                pip install --trusted-host pypi.python.org -r requirements.txt
                 pylint -j 0 -r n -f parseable main_code/ | tee pylint.out
                 '''
             }
