@@ -11,6 +11,7 @@ pipeline {
               	sh '''
               	#!/bin/bash
                 python --version
+                pylint -j 0 -r n -f parseable main_code/ | tee pylint.out
                 '''
             }
         }
