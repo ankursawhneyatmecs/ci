@@ -1,0 +1,42 @@
+*** Settings ***
+Documentation     A test suite with tests for validating stage 1 login.
+...
+...               These tests have a workflow that is created using keywords in the imported resource file.\
+Resource          					resource.robot
+Suite Teardown    					Close all browsers
+
+*** Variables ***
+${SERVER}         					cloudops.dxc.com
+${BROWSER}        					Google Chrome
+${DELAY}          					0
+${EMAIL}		  					ankur.sawhney@dxc.com
+
+${STAGE 1 OPEN LOGIN URL}      		https://${SERVER}/scripts/dashboard/login_stage1.php
+${STAGE 1 OPEN WELCOME TITLE}		Cloudops Dashboard - Login Console
+${STAGE 1 THANKS URL}    			https://${SERVER}/scripts/dashboard/thanks_stage1.html
+${STAGE 1 THANKS TITLE}				CloudOps Dashboard - Thanks @Stage1
+
+*** Test cases ***
+Opening STAGE 1 OPEN LOGIN URL succeeds
+	Open Browser To Page			${STAGE 1 OPEN LOGIN URL}	${BROWSER}	${DELAY}
+	Title Should Be					${STAGE 1 OPEN WELCOME TITLE}
+	
+Login With Invalid Email Should Fail
+    Input Text						email    invalid
+    Click Button    				Submit
+    Element Text Should Be    		register_email_errorloc     Please provide a valid email address
+
+Login With non-dxc domain Email Should Fail
+    Input Text						email    machine_user@gmail.com
+    Click Button    				Submit
+    Element Should Contain    		//span[@class='error']     email:Access restricted to DXC personnel only
+
+Login With Empty Email Should Fail
+	Input Text						email      		${EMPTY}
+    Click Button    				Submit
+    Element Text Should Be    		register_email_errorloc     Please provide your email address
+	
+Login With Valid credentials should Pass
+    Input Text						email    		${EMAIL}
+    Click Button    				Submit
+    Page Should Be Open				${STAGE 1 THANKS URL} 	${STAGE 1 THANKS TITLE}
