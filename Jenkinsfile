@@ -1,8 +1,5 @@
 pipeline {
-  agent {
-        dockerfile true
-    }
-
+  agent any
   stages {
   	  stage('Prepare underlying system') {
           steps {
