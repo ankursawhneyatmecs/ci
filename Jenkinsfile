@@ -3,8 +3,7 @@ pipeline {
   stages {
   	  stage('Prepare underlying system') {
           steps {
-          	deleteDir()
-          	
+       	
               	sh '''
               	#!/bin/bash
                 python --version
