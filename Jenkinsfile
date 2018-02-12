@@ -8,11 +8,8 @@ pipeline {
                   #!/bin/bash
                   python --version
                   ls -l
-                  git clone https://github.com/awslabs/git-secrets
-                  cd git-secrets
-                  make install
-				  git secrets --register-aws --global
-				  git secrets --install
+         	  git secrets --register-aws --global
+		  git secrets --install
                   git secrets --install ~/.git-templates/git-secrets
                   git config --global init.templateDir ~/.git-templates/git-secrets
                 '''
