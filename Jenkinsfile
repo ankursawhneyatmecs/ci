@@ -7,7 +7,7 @@ pipeline {
                 sh '''
                   #!/bin/bash
                   python --version
-                  ls
+                  ls -l
                   git secret 2> /dev/null;
                   status=$?
                   if [ $status -ne 0 ] && [ $status -ne 126 ] ; then 
