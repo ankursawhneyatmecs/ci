@@ -8,13 +8,13 @@ pipeline {
                   #!/bin/bash
                   python --version
                   ls -l
-                  git secret 2> /dev/null;
-                  status=$?
-                  if [ $status -ne 0 ] && [ $status -ne 126 ] ; then 
-                  echo "deb https://dl.bintray.com/sobolevn/deb git-secret main" | sudo tee -a /etc/apt/sources.list
-                  wget -qO - https://api.bintray.com/users/sobolevn/keys/gpg/public.key | sudo apt-key add -
-                  sudo apt-get update && sudo apt-get install git-secret; 
-                  fi;
+                  git clone https://github.com/awslabs/git-secrets
+                  cd git-secrets
+                  make install
+				  git secrets --register-aws --global
+				  git secrets --install
+                  git secrets --install ~/.git-templates/git-secrets
+                  git config --global init.templateDir ~/.git-templates/git-secrets
                 '''
             }
         }
