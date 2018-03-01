@@ -31,7 +31,7 @@ stages {
 		      }
 		    catch (err) {
 			currentBuild.result = 'UNSTABLE'
-			emailext attachLog: true, body: 'Hello', compressLog: true, recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'job ${env.BUILD_NUMBER}', to: 'ankur.sawhney@dxc.com'
+			emailext attachLog: true, body: 'Hello', compressLog: true, recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'job ${env.BUILD_NUMBER}', to: 'ankurshashcode@gmail.com'
 		    }
 	      }  
         }
