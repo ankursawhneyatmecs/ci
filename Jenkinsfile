@@ -4,9 +4,6 @@ pipeline {
 agent any
 
 stages {
-  stage('Run all stages in parallel') {
-
-    parallel {
 	
 	  stage('Read env') {
 		steps {
@@ -34,8 +31,6 @@ stages {
 			emailext attachLog: true, body: 'Hello', compressLog: true, recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'job ${env.BUILD_NUMBER}'
 		    }
 	      }  
-        }
-      }
 
     }
   }
