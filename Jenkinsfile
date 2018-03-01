@@ -1,7 +1,7 @@
 #!groovy
 pipeline {
 
-agent none
+agent any
 
 stages {
   stage('Run all stages in parallel') {
@@ -9,7 +9,6 @@ stages {
     parallel {
 	
 	  stage('Read env') {
-	  agent any
 		steps {
 			script {
 				sh 'env > env.txt' 
@@ -21,11 +20,6 @@ stages {
 	  }
 	  
       stage('Validate Filenames') {
-        agent {
-	  dockerfile {
-	    filename 'ci_tools/check_filename/dockerfile_centos'
-	    }
-        }
         steps {
 				script {
 		    try 
